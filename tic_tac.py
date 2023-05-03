@@ -4,26 +4,26 @@ def run_game():
              ['-', '-', '-']]
     x_or_o = True
     while True:
-        row, col = getInput()
-        x_or_o = updateBoard(row, col, x_or_o, board)
-        if isHaveAWinner(board):
+        row, col = get_input()
+        x_or_o = update_board(row, col, x_or_o, board)
+        if is_have_a_winner(board):
             if x_or_o:
                 print("o is the winner")
             else:
                 print("x is the winner")
             break
-        if isDraw(board):
+        if is_draw(board):
             print('draw!!!')
             break
 
 
-def getInput():
+def get_input():
     row = input('enter the row: ')
     col = input('enter the column: ')
     return row, col
 
 
-def isInputValid(row, col):
+def is_input_valid(row, col):
     if row.isdigit() and col.isdigit():
         if 1 <= int(row) <= 3 and 1 <= int(col) <= 3:
             return True
@@ -33,8 +33,8 @@ def isInputValid(row, col):
         return False
 
 
-def updateBoard(row, col, x_or_o, board):
-    if isInputValid(row, col):
+def update_board(row, col, x_or_o, board):
+    if is_input_valid(row, col):
         row, col = int(row), int(col)
         if board[row - 1][col - 1] == '-':
             if x_or_o:
@@ -52,7 +52,7 @@ def updateBoard(row, col, x_or_o, board):
     return x_or_o
 
 
-def isHaveAWinner(board) -> bool:
+def is_have_a_winner(board) -> bool:
     return (board[0][0] == board[0][1] and board[0][1] == board[0][2] and board[0][2] != '-') or \
             (board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[2][2] != '-') or \
             (board[0][0] == board[1][0] and board[1][0] == board[2][0] and board[2][0] != '-') or \
@@ -63,7 +63,7 @@ def isHaveAWinner(board) -> bool:
             (board[0][2] == board[1][1] and board[1][1] == board[2][0] and board[2][0] != '-')
 
 
-def isDraw(board) -> bool:
+def is_draw(board) -> bool:
     return board[0][0] != '-' and board[0][1] != '-' and board[0][2] != '-' and \
             board[1][0] != '-' and board[1][1] != '-' and board[1][2] != '-' and \
             board[2][0] != '-' and board[2][1] != '-' and board[2][2] != '-'
